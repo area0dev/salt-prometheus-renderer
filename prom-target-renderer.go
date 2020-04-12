@@ -71,8 +71,9 @@ func renderPrometheusTargets() {
 	var minionsOut []Out
 	var minionOut Out
 	for minionName, minion := range minions {
-		minionOut.Labels = map[string]string{}
 		for exporterName, exporterPort := range minion.Exporters {
+			minionOut = Out{}
+			minionOut.Labels = map[string]string{}
 			minionOut.Targets = []string{minionName + ":" + strconv.Itoa(exporterPort)}
 			minionOut.Labels["minion_id"] = minionName
 			minionOut.Labels["exporter_name"] = exporterName
